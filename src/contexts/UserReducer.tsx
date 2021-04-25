@@ -7,6 +7,7 @@ function add(state: State, payload: object) {
 function setCurrentPokemon(state: State, payload: object) {
   return {
     ...state,
+    currentPokemon: payload,
   };
 }
 
@@ -15,6 +16,8 @@ export function reducer(state: State, action: ACTIONTYPE): State {
   switch (type) {
     case "ADD":
       return add(state, payload);
+    case "SET_CURRENT_POKEMON":
+      return setCurrentPokemon(state, payload);
     default:
       return state;
   }

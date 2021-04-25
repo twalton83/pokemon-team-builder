@@ -14,9 +14,17 @@ const RightColumnStyles = styled.div`
 export default function RightColumn() {
   const { state, dispatch } = React.useContext(UserContext);
 
+  const { currentPokemon } = state;
+
   return (
     <RightColumnStyles>
-      <h1>Pokémon</h1>
+      {currentPokemon && (
+        <div>
+          <h1>
+            #{currentPokemon.id} - {currentPokemon.name}
+          </h1>
+        </div>
+      )}
     </RightColumnStyles>
   );
 }
