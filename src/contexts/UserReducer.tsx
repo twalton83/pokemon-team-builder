@@ -1,6 +1,18 @@
 function add(state: State, payload: object) {
+  let added: boolean;
+  const newTeam = state.team.map((item) => {
+    if (typeof item === "number" && !added) {
+      added = true;
+      return payload;
+    }
+    return item;
+  });
+
+  console.log(newTeam);
+
   return {
     ...state,
+    team: newTeam,
   };
 }
 
