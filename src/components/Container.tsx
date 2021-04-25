@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LeftColumn from "./LeftColumn";
+import RightColumn from "./RightColumn";
 
 const ContainerStyles = styled.div`
   display: grid;
@@ -15,6 +16,7 @@ export const Container: React.FC = () => {
   return (
     <ContainerStyles>
       <LeftColumn />
+      <RightColumn />
     </ContainerStyles>
   );
 };

@@ -4,6 +4,12 @@ function add(state: State, payload: object) {
   };
 }
 
+function setCurrentPokemon(state: State, payload: object) {
+  return {
+    ...state,
+  };
+}
+
 export function reducer(state: State, action: ACTIONTYPE): State {
   const { type, payload } = action;
   switch (type) {
@@ -14,7 +20,9 @@ export function reducer(state: State, action: ACTIONTYPE): State {
   }
 }
 
-type ACTIONTYPE = { type: "ADD"; payload: Payload };
+type ACTIONTYPE =
+  | { type: "ADD"; payload: Payload }
+  | { type: "SET_CURRENT_POKEMON"; payload: Payload };
 
 interface Payload {}
 

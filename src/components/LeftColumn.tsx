@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TeamDisplay from "./TeamDisplay";
+import { UserContext } from "../contexts/UserContext";
 
 const LeftColumnStyles = styled.div`
   display: grid;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: 75% 25%;
   height: 100%;
   text-align: center;
   font-size: 1.5rem;
@@ -26,12 +27,28 @@ const SubmitButton = styled.button`
 `;
 
 export default function LeftColumn() {
+  const { state, dispatch } = React.useContext(UserContext);
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${searchValue}/`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <LeftColumnStyles>
       <TeamDisplay />
       <form>
-        <InputStyles type="text" placeholder="Search..." />
-        <SubmitButton>Submit</SubmitButton>
+        <InputStyles
+          type="text"
+          placeholder="Search..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <SubmitButton onClick={handleClick}>Submit</SubmitButton>
       </form>
     </LeftColumnStyles>
   );
