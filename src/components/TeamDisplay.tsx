@@ -1,23 +1,25 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
-
-const PokemonDisplay = styled.div`
-  height: 100%;
-  width: 100%;
-`;
-
+import PokemonCard from "./PokemonDisplay";
 const TeamDisplayStyles = styled.div`
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: 50% 50%;
+
+  height: 100%;
+  width: 100%;
 `;
 const TeamDisplay: React.FC = () => {
   const { state, dispatch } = useContext(UserContext);
-  console.log(state);
+
+  const { team } = state;
+  console.log(team);
   return (
     <TeamDisplayStyles>
-      <h1>Pokemon Team</h1>
+      {team.map((pokemon) => (
+        <PokemonCard pokemon={pokemon} />
+      ))}
     </TeamDisplayStyles>
   );
 };

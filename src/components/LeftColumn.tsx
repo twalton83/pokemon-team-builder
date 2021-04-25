@@ -3,9 +3,8 @@ import styled from "styled-components";
 import TeamDisplay from "./TeamDisplay";
 
 const LeftColumnStyles = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 50% 50%;
   height: 100%;
   text-align: center;
   font-size: 1.5rem;

@@ -1,44 +1,15 @@
 import React, { createContext, useReducer, useEffect } from "react";
+import { reducer } from "./UserReducer";
 
 export const UserContext = createContext(null);
 
-interface Context {
-  state: any;
-  dispatch: any;
-}
-
-interface State {
-  team: Team;
-}
-
-type Team = any[];
-
 const initialState = {
-  team: [],
+  team: [1, 2, 3, 4, 5, 6],
 };
-
-function add(state: State, payload: object) {
-  return {
-    ...state,
-  };
-}
-
-function reducer(state: State, action: ACTIONTYPE): State {
-  const { type, payload } = action;
-  switch (type) {
-    case "ADD":
-      return add(state, payload);
-    default:
-      return state;
-  }
-}
-
-type ACTIONTYPE = { type: "ADD"; payload: Payload };
-
-interface Payload {}
 
 export function UserProvider(props: ProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       {props.children}
