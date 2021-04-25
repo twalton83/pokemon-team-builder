@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { UserContext } from "../contexts/UserContext";
+import { upperCase } from "../helpers";
 
 const RightColumnStyles = styled.div`
   display: flex;
@@ -45,12 +46,16 @@ export default function RightColumn() {
       {currentPokemon && (
         <div className="data-container">
           <h1>
-            #{currentPokemon.id} - {currentPokemon.name}
+            #{currentPokemon.id} - {upperCase(currentPokemon.name)}
           </h1>
           <img
             src={currentPokemon.sprites["front_default"]}
             alt={currentPokemon.name}
           />
+
+          {currentPokemon.types.map((type: { type: { name: string } }) => {
+            return <p className="type">{upperCase(type.type.name)}</p>;
+          })}
           {/* TODO: Change to remove from team if pokemon is from team */}
           <button onClick={handleClick}>ADD TO TEAM</button>
         </div>

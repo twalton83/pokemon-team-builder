@@ -36,7 +36,6 @@ export default function LeftColumn() {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${searchValue}/`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch({
           type: "SET_CURRENT_POKEMON",
           payload: data,

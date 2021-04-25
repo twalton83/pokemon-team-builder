@@ -1,18 +1,23 @@
 function add(state: State, payload: object) {
-  let added: boolean;
-  const newTeam = state.team.map((item) => {
-    if (typeof item === "number" && !added) {
-      added = true;
-      return payload;
-    }
-    return item;
-  });
+  if (!state.team.includes(payload)) {
+    let added: boolean;
 
-  console.log(newTeam);
+    const newTeam = state.team.map((item) => {
+      // this typecheck also prevents adding more than 6
+      if (typeof item === "number" && !added) {
+        added = true;
+        return payload;
+      }
+      return item;
+    });
 
+    return {
+      ...state,
+      team: newTeam,
+    };
+  }
   return {
     ...state,
-    team: newTeam,
   };
 }
 

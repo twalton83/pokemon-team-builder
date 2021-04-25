@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
+import { upperCase } from "../helpers";
 
 const PokemonCardStyles = styled.div`
   display: flex;
@@ -36,16 +37,25 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
 
   return (
     <PokemonCardStyles>
-      {pokemon && (
+      {/* TODO: Determine better way to replace items in array so we don't need to do this typecheck */}
+      {!(typeof pokemon === "number") && (
         <div>
-          <p>{pokemon.name}</p>
-          <p>{pokemon.type}</p>
+          <p>{upperCase(pokemon.name)}</p>
+          <img src={pokemon.sprites["front_default"]} alt="" />
+          {pokemon.types.map((type: { type: { name: string } }) => {
+            return (
+              <p key={type.type.name} className="type">
+                {upperCase(type.type.name)}
+              </p>
+            );
+          })}
         </div>
       )}
-
-      <NoPokemonIcon>
-        <p>?</p>
-      </NoPokemonIcon>
+      {typeof pokemon === "number" && (
+        <NoPokemonIcon>
+          <p>?</p>
+        </NoPokemonIcon>
+      )}
     </PokemonCardStyles>
   );
 }
@@ -56,5 +66,6 @@ type PokemonCardProps = {
 
 interface Pokemon {
   name: string;
-  type: string;
+  types: object[];
+  sprites: [];
 }

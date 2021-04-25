@@ -19,7 +19,7 @@ const TeamDisplay: React.FC = () => {
   return (
     <TeamDisplayStyles>
       {team.map((pokemon) => (
-        <PokemonCard pokemon={pokemon} />
+        <PokemonCard key={pokemon.name || pokemon} pokemon={pokemon} />
       ))}
     </TeamDisplayStyles>
   );
