@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
 import { upperCase } from "../utils/helpers";
+// import { useWeaknesses } from "../utils/hooks";
 
 const PokemonCardStyles = styled.div`
   display: flex;
