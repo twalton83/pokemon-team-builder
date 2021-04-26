@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
-import { upperCase } from "../helpers";
+import { upperCase } from "../utils/helpers";
 
 const PokemonCardStyles = styled.div`
   display: flex;

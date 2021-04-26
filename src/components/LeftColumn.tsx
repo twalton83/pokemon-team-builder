@@ -15,6 +15,7 @@ const InputStyles = styled.input`
   height: 40px;
   border: 1px solid lightgray;
   border-radius: 5px 0px 0px 5px;
+  width: 15vw;
 `;
 
 const SubmitButton = styled.button`

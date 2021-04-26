@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { UserContext } from "../contexts/UserContext";
-import { upperCase } from "../helpers";
+import { upperCase } from "../utils/helpers";
 
 const RightColumnStyles = styled.div`
   display: flex;
