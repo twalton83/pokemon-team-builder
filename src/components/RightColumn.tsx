@@ -40,26 +40,27 @@ export default function RightColumn() {
   const [weaknesses, setWeaknesses] = useState(null);
 
   useEffect(() => {
+    async function gatherWeaknesses() {
+      if (currentPokemon === undefined) {
+        console.log("undefined");
+        return ["No Pokémon Selected"];
+      }
+
+      const promises = currentPokemon.types.map(async (type) => {
+        let data = await fetch(
+          `https://pokeapi.co/api/v2/type/${type.type.name}/`
+        );
+        const weakness = await data.json();
+        return weakness;
+      });
+      const weaknesses = await Promise.all(promises);
+      console.log(weaknesses);
+      setWeaknesses(weaknesses);
+
+      return weaknesses;
+    }
     gatherWeaknesses();
   }, [currentPokemon]);
-
-  async function gatherWeaknesses() {
-    if (currentPokemon === undefined) {
-      return ["No Pokémon Selected"];
-    }
-
-    const promises = currentPokemon.types.map(async (type) => {
-      let data = await fetch(
-        `https://pokeapi.co/api/v2/type/${type.type.name}/`
-      );
-      const weakness = await data.json();
-      return weakness;
-    });
-    const weaknesses = await Promise.all(promises);
-    setWeaknesses(weaknesses);
-
-    return weaknesses;
-  }
 
   const handleClick = (e: React.MouseEvent) => {
     dispatch({ type: "ADD", payload: currentPokemon });
@@ -84,11 +85,12 @@ export default function RightColumn() {
             );
           })}
           <p>Weaknesses: </p>
-          {weaknesses.map((weakness) =>
-            weakness["damage_relations"]["double_damage_from"].map((damage) => (
-              <p> {upperCase(damage.name)} </p>
-            ))
-          )}
+          {weaknesses &&
+            weaknesses.map((weakness) =>
+              weakness["damage_relations"][
+                "double_damage_from"
+              ].map((damage) => <p> {upperCase(damage.name)} </p>)
+            )}
           {/* TODO: Change to remove from team if pokemon is from team */}
           <button onClick={handleClick}>ADD TO TEAM</button>
         </div>
